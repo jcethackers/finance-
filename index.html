@@ -8,7 +8,7 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@500;700&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
     <script>
       tailwind.config = {
         theme: {
@@ -16,37 +16,39 @@
             fontFamily: {
               sans: ['Inter', 'sans-serif'],
               display: ['Space Grotesk', 'sans-serif'],
+              mono: ['JetBrains Mono', 'monospace'],
             },
             colors: {
-              // Overriding Slate to match the Violet/DeFi Vibe
               slate: {
                 50: '#f5f3ff',
                 100: '#ede9fe',
                 200: '#ddd6fe',
                 300: '#c4b5fd',
                 400: '#a78bfa',
-                500: '#8b5cf6', // Violet-500
+                500: '#8b5cf6',
                 600: '#7c3aed',
-                700: '#2D2A4A', // Custom Dark Violet Border
-                800: '#1A1832', // Custom Dark Violet Surface
-                900: '#0F0E26', // Custom Dark Violet Card
-                950: '#030014', // Deepest background
+                700: '#2D2A4A',
+                800: '#1A1832',
+                900: '#0F0E26',
+                950: '#030014',
               },
               fintech: {
-                900: '#030014', // Deep Space (Main BG)
-                800: '#0F0E26', // Deep Cosmos (Card BG)
-                700: '#252245', // Space Dust (Borders)
-                card: '#131129', // Card
-                accent: '#8B5CF6', // Vivid Violet
-                accentHover: '#7C3AED', // Vivid Violet Darker
-                danger: '#ef4444', // red-500
-                warning: '#f59e0b', // amber-500
+                900: '#05050A', // Darker void
+                800: '#0F0E26',
+                700: '#252245',
+                card: '#131129',
+                accent: '#8B5CF6',
+                accentHover: '#7C3AED',
+                neonBlue: '#3B82F6',
+                neonGreen: '#10B981',
+                neonCyan: '#06b6d4',
               }
             },
             animation: {
-              'fade-in': 'fadeIn 0.5s ease-out',
-              'slide-up': 'slideUp 0.5s ease-out',
-              'pulse-slow': 'pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+              'fade-in': 'fadeIn 0.8s ease-out forwards',
+              'slide-up': 'slideUp 0.8s ease-out forwards',
+              'pulse-slow': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+              'float': 'float 6s ease-in-out infinite',
             },
             keyframes: {
               fadeIn: {
@@ -54,8 +56,12 @@
                 '100%': { opacity: '1' },
               },
               slideUp: {
-                '0%': { transform: 'translateY(20px)', opacity: '0' },
+                '0%': { transform: 'translateY(40px)', opacity: '0' },
                 '100%': { transform: 'translateY(0)', opacity: '1' },
+              },
+              float: {
+                '0%, 100%': { transform: 'translateY(0)' },
+                '50%': { transform: 'translateY(-20px)' },
               }
             }
           }
@@ -64,8 +70,9 @@
     </script>
     <style>
       body {
-        background-color: #030014; /* Matches fintech-900 / slate-950 */
+        background-color: #05050A;
         color: #f8fafc;
+        overflow-x: hidden;
       }
       /* Custom Scrollbar */
       ::-webkit-scrollbar {
@@ -81,6 +88,22 @@
       }
       ::-webkit-scrollbar-thumb:hover {
         background: #3D3A62; 
+      }
+      .glass-card {
+        background: rgba(255, 255, 255, 0.03);
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+        border: 1px solid rgba(255, 255, 255, 0.05);
+      }
+      .glass-card:hover {
+        background: rgba(255, 255, 255, 0.05);
+        border-color: rgba(139, 92, 246, 0.3);
+      }
+      .text-gradient {
+        background-clip: text;
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-image: linear-gradient(to right, #8B5CF6, #06b6d4);
       }
     </style>
   <script type="importmap">

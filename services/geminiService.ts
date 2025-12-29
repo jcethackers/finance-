@@ -3,7 +3,6 @@ import { Transaction, AIInsight } from '../types';
 import { INITIAL_SYSTEM_INSTRUCTION } from '../constants';
 
 // We assume the API key is available via process.env.API_KEY
-// In a real hackathon setting, ensure this environment variable is set.
 const apiKey = process.env.API_KEY || ''; 
 
 let chatSession: Chat | null = null;
@@ -25,13 +24,16 @@ export const initializeChat = (transactions: Transaction[]) => {
     Here is the user's transaction history for the current period:
     ${simplifiedTransactions}
     
-    Use this data to answer their questions.
+    Use this data to answer their questions accurately. 
+    Use your thinking capabilities to analyze complex patterns if asked about forecasts or deep insights.
   `;
 
+  // UPGRADE: Using Gemini 3.0 Pro for advanced reasoning
   chatSession = ai.chats.create({
     model: 'gemini-3-pro-preview',
     config: {
       systemInstruction: INITIAL_SYSTEM_INSTRUCTION + "\n" + contextPrompt,
+      // CRITICAL: Maximize thinking budget for complex financial logic
       thinkingConfig: {
         thinkingBudget: 32768, 
       }
@@ -92,6 +94,7 @@ export const generateInitialInsights = async (transactions: Transaction[]): Prom
   `;
 
   try {
+    // Keep Flash for initial insights as it needs to be fast and JSON-structured
     const response = await ai.models.generateContent({
       model: 'gemini-3-flash-preview',
       contents: prompt,
