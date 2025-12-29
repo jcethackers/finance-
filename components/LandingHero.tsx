@@ -1,16 +1,17 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { 
   ArrowRight, ShieldCheck, Zap, TrendingUp, Sparkles, 
-  Activity, Lock, Database, Cpu, PieChart, Globe, ChevronRight 
+  Activity, Database, Cpu, PieChart, Globe, ChevronRight 
 } from 'lucide-react';
+import { 
+  SentimentEngine, FraudHunter, WealthSimulator, DocScanner, CreditScorer 
+} from './InteractiveDemos';
 
 interface LandingHeroProps {
   onStart: () => void;
 }
 
 export const LandingHero: React.FC<LandingHeroProps> = ({ onStart }) => {
-  const [investment, setInvestment] = useState(10000);
-
   return (
     <div className="relative w-full overflow-hidden">
       
@@ -86,84 +87,17 @@ export const LandingHero: React.FC<LandingHeroProps> = ({ onStart }) => {
         </div>
       </section>
 
-      {/* --- LIVE SIMULATION SECTION --- */}
+      {/* --- FEATURE DEMO 1: WEALTH SIMULATOR --- */}
       <section className="py-24 relative border-t border-white/5 bg-fintech-900/50 backdrop-blur-sm">
         <div className="max-w-7xl mx-auto px-6">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-            <div>
-              <h2 className="text-3xl md:text-5xl font-display font-bold mb-6">
-                Predictive <span className="text-gradient">Alpha</span> Generation
-              </h2>
-              <p className="text-slate-400 text-lg mb-8 leading-relaxed">
-                Our Gemini-powered engine simulates thousands of market scenarios to forecast your portfolio's growth potential versus traditional index funds.
-              </p>
-              
-              <div className="glass-card p-8 rounded-2xl border border-fintech-accent/20">
-                <div className="mb-8">
-                  <div className="flex justify-between text-sm font-medium text-slate-400 mb-2">
-                    <span>Initial Investment</span>
-                    <span className="text-white font-mono">${investment.toLocaleString()}</span>
-                  </div>
-                  <input 
-                    type="range" 
-                    min="1000" 
-                    max="100000" 
-                    step="1000"
-                    value={investment}
-                    onChange={(e) => setInvestment(parseInt(e.target.value))}
-                    className="w-full h-2 bg-slate-800 rounded-lg appearance-none cursor-pointer accent-fintech-accent"
-                  />
-                </div>
-                
-                <div className="grid grid-cols-2 gap-4">
-                  <div className="p-4 rounded-xl bg-slate-900/50 border border-slate-800">
-                    <div className="text-xs text-slate-500 mb-1">Traditional Yield (5yr)</div>
-                    <div className="text-2xl font-mono text-slate-300">
-                      ${Math.floor(investment * 1.45).toLocaleString()}
-                    </div>
-                  </div>
-                  <div className="p-4 rounded-xl bg-fintech-accent/10 border border-fintech-accent/30 relative overflow-hidden">
-                    <div className="absolute top-0 right-0 p-1">
-                      <Sparkles className="w-3 h-3 text-fintech-accent" />
-                    </div>
-                    <div className="text-xs text-fintech-accent mb-1">AI Optimized (5yr)</div>
-                    <div className="text-2xl font-mono text-white font-bold">
-                      ${Math.floor(investment * 1.82).toLocaleString()}
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
+           <WealthSimulator />
+        </div>
+      </section>
 
-            <div className="relative h-[400px] w-full bg-slate-900/50 rounded-2xl border border-slate-800 p-6 flex items-center justify-center overflow-hidden">
-               {/* Decorative Grid */}
-               <div className="absolute inset-0" style={{ backgroundImage: 'radial-gradient(circle, #333 1px, transparent 1px)', backgroundSize: '20px 20px', opacity: 0.2 }}></div>
-               
-               {/* Visual Chart */}
-               <svg viewBox="0 0 400 200" className="w-full h-full drop-shadow-[0_0_15px_rgba(16,185,129,0.3)]">
-                  <path 
-                    d="M0,200 Q50,180 100,150 T200,100 T300,60 T400,20" 
-                    fill="none" 
-                    stroke="#10b981" 
-                    strokeWidth="3" 
-                    className="animate-pulse"
-                  />
-                  <path 
-                    d="M0,200 Q50,190 100,170 T200,140 T300,120 T400,90" 
-                    fill="none" 
-                    stroke="#64748b" 
-                    strokeWidth="2" 
-                    strokeDasharray="5,5"
-                  />
-               </svg>
-               
-               {/* Floating Label */}
-               <div className="absolute top-[10%] right-[10%] glass-card px-4 py-2 rounded-lg flex items-center gap-2 animate-float">
-                  <div className="w-2 h-2 rounded-full bg-fintech-neonGreen animate-pulse" />
-                  <span className="font-mono text-xs text-fintech-neonGreen">+32.4% Variance</span>
-               </div>
-            </div>
-          </div>
+      {/* --- FEATURE DEMO 2: SENTIMENT ENGINE --- */}
+      <section className="py-24 relative bg-[#030014]">
+        <div className="max-w-7xl mx-auto px-6">
+           <SentimentEngine />
         </div>
       </section>
 
@@ -196,6 +130,20 @@ export const LandingHero: React.FC<LandingHeroProps> = ({ onStart }) => {
             />
           </div>
         </div>
+      </section>
+
+      {/* --- FEATURE DEMO 3: FRAUD HUNTER --- */}
+      <section className="py-24 relative bg-fintech-900 border-t border-white/5">
+        <div className="max-w-7xl mx-auto px-6">
+           <FraudHunter />
+        </div>
+      </section>
+
+      {/* --- FEATURE DEMO 4: CREDIT SCORER --- */}
+      <section className="py-24 relative bg-[#030014]">
+         <div className="max-w-7xl mx-auto px-6">
+            <CreditScorer />
+         </div>
       </section>
 
       {/* --- HOW IT WORKS (TIMELINE) --- */}
@@ -234,8 +182,15 @@ export const LandingHero: React.FC<LandingHeroProps> = ({ onStart }) => {
         </div>
       </section>
 
+      {/* --- FEATURE DEMO 5: DOC SCANNER --- */}
+      <section className="py-24 relative bg-fintech-900 border-y border-white/5">
+         <div className="max-w-7xl mx-auto px-6">
+            <DocScanner />
+         </div>
+      </section>
+
       {/* --- DATA VISUALIZATION / STATS --- */}
-      <section className="py-24 bg-fintech-800/30 border-y border-white/5">
+      <section className="py-24 bg-fintech-800/30">
         <div className="max-w-7xl mx-auto px-6">
           <div className="grid grid-cols-1 md:grid-cols-4 gap-8 text-center">
              <StatItem value="$4.2B" label="Transactions Processed" />
